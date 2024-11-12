@@ -2,8 +2,8 @@ const ProductModel = require('../models/product')
 
 exports.getAll = async (req, res) => {
     try {
-        const products = await ProductModel.find();
-        return res.status(200).json({ message: 'All products fetched successfully', products });
+        const data = await ProductModel.find();
+        return res.status(200).json({ message: 'All products fetched successfully', data });
     } catch (e) {
         console.log(e);
         sendErrorResponse(res, 'Failed to fetch products', e);
@@ -13,13 +13,13 @@ exports.getAll = async (req, res) => {
 exports.read = async (req, res) => {
     try {
         const { slug } = req.params;
-        const product = await ProductModel.findOne({ slug });
+        const data = await ProductModel.findOne({ slug });
 
-        if (!product) {
-            return res.status(404).json({ message: 'Slug not matched. Product not found', products });
+        if (!data) {
+            return res.status(404).json({ message: 'Slug not matched. Product not found'});
         }
 
-        return res.status(404).json({ message: 'Product fetched successfully', product });
+        return res.status(404).json({ message: 'Product fetched successfully', data });
     } catch (e) {
         console.log(e);
         sendErrorResponse(res, 'Server error', e, 500);
