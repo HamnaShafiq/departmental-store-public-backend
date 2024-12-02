@@ -2,9 +2,7 @@ const CategoryModel = require('../models/category')
 
 exports.getAll = async (req, res) => {
     try {
-        const data = await CategoryModel.find().populate('products');
-        console.log('data', data);
-        
+        const data = await CategoryModel.find().populate('products');        
         return res.status(200).json({ message: 'All categories fetched successfully', data });
     } catch (e) {
         console.log(e)
